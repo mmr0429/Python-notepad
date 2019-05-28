@@ -1,23 +1,32 @@
 from tkinter import *
+from tkinter import filedialog
+from fileio import *
 
-#ubuntu font
-#config file
-#dark/dark blue color scheme
+#mini TODO
+#ubuntu monospace font
 
-
-f_size=11
-wfont="Arial"
-background_color="black"
-font_color="white"
-cursor_color="pink"
-def_size="500x300"
-win_title="Macias's Project"
+conf_file=fread("settings")
+conf_file=conf_file.split(",")
 
 
+f_size=int(conf_file[0])
+wfont=conf_file[1]
+background_color=conf_file[2]
+font_color=conf_file[3]
+cursor_color=conf_file[4]
+def_size=conf_file[5]
+win_title=conf_file[6]
 
+window=Tk()
+window.title(win_title)
+window.configure(background="gray")
+window.geometry(def_size)
 
 def testing():
     print("Opening")
+    window.filename = filedialog.askopenfilename(initialdir = "~",title = "Select file",filetypes = (("text files","*.txt"),("all files","*.*")))
+
+    print(window.filename)
 
 def save():
     print("Saving")
@@ -26,10 +35,7 @@ def save_as():
     print("Saving as")
 
 
-window=Tk()
-window.title(win_title)
-window.configure(background="gray")
-window.geometry(def_size)
+
 
 #menu bar
 menu_bar=Menu(window)
