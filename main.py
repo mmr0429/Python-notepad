@@ -22,24 +22,45 @@ window.title(win_title)
 window.configure(background="gray")
 window.geometry(def_size)
 
-def testing():
+is_new=1
+
+def new():
+    window.title("New File")
+    global is_new
+    is_new = 1
+    #print(is_new)
+
+def open():
     print("Opening")
     window.filename = filedialog.askopenfilename(initialdir = "~",title = "Select file",filetypes = (("text files","*.txt"),("all files","*.*")))
+    window.title(window.filename)
+    f_content=fread(str(window.filename))
+    global is_new
+    is_new = 0
 
     print(window.filename)
-
-def save():
-    print("Saving")
+    print(f_content)
 
 def save_as():
     print("Saving as")
+
+
+def save():
+    print("Saving")
+    if is_new is 1:
+        save_as()
+
+
+
+
 
 
 
 
 #menu bar
 menu_bar=Menu(window)
-menu_bar.add_command(label="Open", command=testing)
+menu_bar.add_command(label="New", command=new)
+menu_bar.add_command(label="Open", command=open)
 menu_bar.add_command(label="Save", command=save)
 menu_bar.add_command(label="Save as", command=save_as)
 window.config(menu=menu_bar)
