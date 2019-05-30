@@ -43,18 +43,14 @@ def open():
 
 def save_as():
     print("Saving as")
+    save_as_dir=filedialog.asksaveasfilename(initialdir="~",defaultextension=".txt",title = "Select save location",filetypes=(("text files","*txt"),("all files", "*.*")))
 
+    print(save_as_dir)
 
 def save():
     print("Saving")
     if is_new is 1:
         save_as()
-
-
-
-
-
-
 
 
 #menu bar
