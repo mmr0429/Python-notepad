@@ -24,6 +24,19 @@ window.geometry(def_size)
 
 is_new=1
 
+
+
+#text window and scroll bar
+text_area=Text(window)
+text_area.pack(expand=True, fill=BOTH)
+#scrollbar=Scrollbar(text_area)
+#scrollbar.pack(side=RIGHT, fill=Y)
+#custom colors
+text_area.configure(background=background_color, fg=font_color, insertbackground=cursor_color, font=(wfont,f_size))
+text_area.focus_set() #focus to the text area
+
+
+
 def new():
     window.title("New File")
     global is_new
@@ -40,12 +53,17 @@ def open():
 
     print(window.filename)
     print(f_content)
+    text_area.insert("1.0",f_content)
+
 
 def save_as():
     print("Saving as")
     save_as_dir=filedialog.asksaveasfilename(initialdir="~",defaultextension=".txt",title = "Select save location",filetypes=(("text files","*txt"),("all files", "*.*")))
 
     print(save_as_dir)
+    acontent=text_area.get("1.0", "end-1c")
+    print(acontent)
+    fwrite(save_as_dir,acontent)
 
 def save():
     print("Saving")
@@ -61,14 +79,7 @@ menu_bar.add_command(label="Save", command=save)
 menu_bar.add_command(label="Save as", command=save_as)
 window.config(menu=menu_bar)
 
-#text window and scroll bar
-text_area=Text(window)
-text_area.pack(expand=True, fill=BOTH)
-#scrollbar=Scrollbar(text_area)
-#scrollbar.pack(side=RIGHT, fill=Y)
-    #custom colors
-text_area.configure(background=background_color, fg=font_color, insertbackground=cursor_color, font=(wfont,f_size))
-text_area.focus_set() #focus to the text area
+
 
 
 
