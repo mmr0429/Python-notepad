@@ -51,17 +51,18 @@ def new():
 
 def open():
     #print("Opening")
-    cleararea()
-    window.filename = filedialog.askopenfilename(initialdir = "~",title = "Select file",filetypes = (("text files","*.txt"),("all files","*.*")))
-    window.title(window.filename)
-    f_content=fread(str(window.filename))
-    global is_new
-    is_new = 0
-    global path_to_save
-    path_to_save=str(window.filename)
-    #print(window.filename)
-    #print(f_content)
-    text_area.insert("1.0",f_content)
+    try:
+        window.filename = filedialog.askopenfilename(initialdir = "~",title = "Select file",filetypes = (("text files","*.txt"),("all files","*.*")))
+        window.title(window.filename)
+        f_content=fread(str(window.filename))
+        global is_new
+        is_new = 0
+        global path_to_save
+        path_to_save=str(window.filename)
+        cleararea()
+        text_area.insert("1.0",f_content)	
+    except:
+        print("Could not open a file!")
 
 
 def save_as():
