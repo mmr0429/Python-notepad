@@ -36,6 +36,7 @@ text_area.configure(background=background_color, fg=font_color, insertbackground
 text_area.focus_set() #focus to the text area
 
 
+path_to_save=""
 
 def new():
     window.title("New File")
@@ -61,15 +62,22 @@ def save_as():
     save_as_dir=filedialog.asksaveasfilename(initialdir="~",defaultextension=".txt",title = "Select save location",filetypes=(("text files","*txt"),("all files", "*.*")))
 
     print(save_as_dir)
+    global path_to_save
+    path_to_save=save_as_dir
     acontent=text_area.get("1.0", "end-1c")
     print(acontent)
     fwrite(save_as_dir,acontent)
+    global is_new
+    is_new=0
 
 def save():
     print("Saving")
     if is_new is 1:
         save_as()
-
+    else:
+        global path_to_save
+        acontent=text_area.get("1.0", "end-1c")
+        fwrite(path_to_save,acontent)
 
 #menu bar
 menu_bar=Menu(window)
