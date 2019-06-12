@@ -2,8 +2,6 @@ from tkinter import *
 from tkinter import filedialog
 from fileio import *
 
-#mini TODO
-#ubuntu monospace font
 
 conf_file=fread("settings")
 conf_file=conf_file.split(",")
